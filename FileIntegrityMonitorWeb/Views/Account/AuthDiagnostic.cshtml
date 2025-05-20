@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Authentication Diagnostic";
+}
+
+<div class="container">
+    <h1>Authentication Diagnostic</h1>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Authentication Status</h5>
+            <dl class="row">
+                <dt class="col-sm-4">Is Authenticated:</dt>
+                <dd class="col-sm-8">@User.Identity?.IsAuthenticated</dd>
+
+                <dt class="col-sm-4">Authentication Type:</dt>
+                <dd class="col-sm-8">@User.Identity?.AuthenticationType</dd>
+
+                <dt class="col-sm-4">User Name:</dt>
+                <dd class="col-sm-8">@User.Identity?.Name</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Claims Information</h5>
+            @if (User.Claims.Any())
+            {
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Claim Type</th>
+                            <th>Claim Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var claim in User.Claims)
+                        {
+                            <tr>
+                                <td>@claim.Type</td>
+                                <td>@claim.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>No claims found.</p>
+            }
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Database Check</h5>
+            <div id="dbStatus">Checking database status...</div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('/Account/CheckDatabaseStatus')
+                .then(response => response.json())
+                .then(data => {
+                    const dbStatusElement = document.getElementById('dbStatus');
+                    dbStatusElement.innerHTML = `
+                        <p>Database Exists: ${data.databaseExists}</p>
+                        <p>User Count: ${data.userCount}</p>
+                        <p>Database Path: ${data.dbPath}</p>
+                    `;
+                })
+                .catch(error => {
+                    document.getElementById('dbStatus').textContent = 'Error checking database status: ' + error;
+                });
+        });
+    </script>
+}

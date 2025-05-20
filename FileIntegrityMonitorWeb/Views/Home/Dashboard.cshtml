@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <div class="alert alert-success">
+                <h4>Welcome @ViewData["UserName"]!</h4>
+                <p>You are now logged into the File Integrity Monitoring System.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Monitor Files</h5>
+                    <p class="card-text">Start monitoring a directory for file changes.</p>
+                    <a asp-controller="FileMonitor" asp-action="MonitorDirectory" class="btn btn-primary">Monitor Directory</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">View Monitored Files</h5>
+                    <p class="card-text">View all files currently being monitored by the system.</p>
+                    <a asp-controller="FileMonitor" asp-action="Index" class="btn btn-primary">View Files</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

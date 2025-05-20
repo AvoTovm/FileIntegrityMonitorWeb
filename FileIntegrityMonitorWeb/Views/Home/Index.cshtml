@@ -1,0 +1,39 @@
+﻿<!-- Views/Home/Index.cshtml -->
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">File Integrity Monitoring System</h1>
+    <p class="lead">Track and monitor changes to your important files</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">What is FIM?</h5>
+                <p class="card-text">
+                    File Integrity Monitoring (FIM) is a security practice that involves monitoring and checking the state of files to see if they have been tampered with or corrupted.
+                </p>
+                <p class="card-text">
+                    Our system computes a hash of your files and stores it in a database. Each time the system runs, it recalculates the hashes and compares them to the stored values, alerting you to any changes.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Get Started</h5>
+                <p class="card-text">
+                    To begin monitoring your files, register for an account or log in if you already have one.
+                </p>
+                <div class="d-grid gap-2">
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-primary">Register</a>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
