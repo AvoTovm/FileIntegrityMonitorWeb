@@ -54,12 +54,10 @@ namespace FileIntegrityMonitor.Controllers
                     // Try to create the user
                     var result = await _userManager.CreateAsync(user, model.Password);
 
-                    // Log the result for debugging
                     Console.WriteLine($"User creation attempt for {model.Email}: {result.Succeeded}");
 
                     if (result.Succeeded)
                     {
-                        // Verify the user was saved to database
                         var createdUser = await _userManager.FindByEmailAsync(model.Email);
                         if (createdUser != null)
                         {
